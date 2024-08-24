@@ -2,11 +2,9 @@
 
 import { memo, useRef } from "react";
 import Paper from "@mui/material/Paper";
-import { makeStyles } from "@mui/styles";
 import { createTheme, ThemeProvider } from "@mui/material/styles";
-import styles from "./styles";
 import classnames from "classnames";
-import type { Region } from "../ImageCanvas/region-tools";
+import type { Region } from "../types/region-tools.ts";
 import IconButton from "@mui/material/IconButton";
 import Button from "@mui/material/Button";
 import TrashIcon from "@mui/icons-material/Delete";
@@ -16,15 +14,64 @@ import Select from "react-select";
 import CreatableSelect from "react-select/creatable";
 
 import { asMutable } from "seamless-immutable";
+import { tss } from "tss-react/mui";
+import { grey } from "@mui/material/colors";
 
 const theme = createTheme();
-const useStyles = makeStyles(styles);
+const useStyles = tss.create({
+  regionInfo: {
+    fontSize: 12,
+    cursor: "default",
+    transition: "opacity 200ms",
+    opacity: 0.5,
+    "&:hover": {
+      opacity: 0.9,
+      cursor: "pointer",
+    },
+    "&.highlighted": {
+      opacity: 0.9,
+      "&:hover": {
+        opacity: 1,
+      },
+    },
+    // pointerEvents: "none",
+    fontWeight: 600,
+    color: grey[900],
+    padding: 8,
+    "& .name": {
+      display: "flex",
+      flexDirection: "row",
+      alignItems: "center",
+      "& .circle": {
+        marginRight: 4,
+        boxShadow: "0px 0px 2px rgba(0,0,0,0.4)",
+        width: 10,
+        height: 10,
+        borderRadius: 5,
+      },
+    },
+    "& .tags": {
+      "& .tag": {
+        color: grey[700],
+        display: "inline-block",
+        margin: 1,
+        fontSize: 10,
+        textDecoration: "underline",
+      },
+    },
+  },
+  commentBox: {
+    fontWeight: 400,
+    fontSize: 13,
+  },
+});
 
-type Props = {
+export type RegionLabelProps = {
   region: Region;
   editing?: boolean;
   allowedClasses?: Array<string> | Array<{ id: string; label: string }>;
   allowedTags?: Array<string>;
+  tagSingleSelection?: boolean;
   cls?: string;
   tags?: Array<string>;
   onDelete: (r: Region) => void;
@@ -40,14 +87,15 @@ export const RegionLabel = ({
   editing,
   allowedClasses,
   allowedTags,
+  tagSingleSelection,
   onDelete,
   onChange,
   onClose,
   onOpen,
   onRegionClassAdded,
   allowComments,
-}: Props) => {
-  const classes = useStyles();
+}: RegionLabelProps) => {
+  const { classes } = useStyles();
   const commentInputRef = useRef<HTMLDivElement | null>(null);
   const onCommentInputClick = () => {
     // The TextField wraps the <input> tag with two divs
@@ -183,18 +231,27 @@ export const RegionLabel = ({
             {(allowedTags || []).length > 0 && (
               <div style={{ marginTop: 4 }}>
                 <Select
-                  onChange={(newTags) =>
-                    onChange({
-                      ...region,
-                      tags: newTags.map((t) => t.value),
-                    })
-                  }
+                  onChange={(newTags) => {
+                    if (Array.isArray(newTags)) {
+                      onChange({
+                        ...region,
+                        tags: newTags.map((t) => t.value),
+                      });
+                      return;
+                    }
+                    if (newTags && "value" in newTags) {
+                      onChange({
+                        ...region,
+                        tags: [newTags.value],
+                      });
+                    }
+                  }}
                   placeholder="Tags"
                   value={(region.tags || []).map((c) => ({
                     label: c,
                     value: c,
                   }))}
-                  isMulti
+                  isMulti={!tagSingleSelection}
                   options={asMutable(
                     allowedTags?.map((c) => ({ value: c, label: c }))
                   )}

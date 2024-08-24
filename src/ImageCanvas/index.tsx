@@ -18,10 +18,8 @@ import type {
   Point,
   Polygon,
   Region,
-} from "./region-tools";
-import { makeStyles } from "@mui/styles";
+} from "../types/region-tools.ts";
 import { createTheme, ThemeProvider } from "@mui/material/styles";
-import styles from "./styles";
 import PreventScrollToParents from "../PreventScrollToParents";
 import useWindowSize from "../hooks/use-window-size.tsx";
 import useMouse from "./use-mouse";
@@ -30,7 +28,7 @@ import useExcludePattern from "../hooks/use-exclude-pattern";
 import { useRafState } from "react-use";
 import PointDistances from "../PointDistances";
 import RegionTags from "../RegionTags";
-import RegionLabel from "../RegionLabel";
+import RegionLabel, { RegionLabelProps } from "../RegionLabel";
 import ImageMask from "../ImageMask";
 import RegionSelectAndTransformBoxes from "../RegionSelectAndTransformBoxes";
 import VideoOrImageCanvasBackground from "../VideoOrImageCanvasBackground";
@@ -39,9 +37,34 @@ import RegionShapes from "../RegionShapes";
 import useWasdMode from "./use-wasd-mode";
 import { ImagePosition } from "../types/common.ts";
 import { AutosegOptions } from "autoseg/webworker";
+import { tss } from "tss-react/mui";
 
 const theme = createTheme();
-const useStyles = makeStyles(styles);
+const useStyles = tss.create({
+  canvas: { width: "100%", height: "100%", position: "relative", zIndex: 1 },
+  zoomIndicator: {
+    position: "absolute",
+    bottom: 16,
+    right: 0,
+    backgroundColor: "rgba(0,0,0,0.4)",
+    color: "#fff",
+    opacity: 0.5,
+    fontWeight: "bolder",
+    fontSize: 14,
+    padding: 4,
+  },
+  fixedRegionLabel: {
+    position: "absolute",
+    zIndex: 10,
+    top: 10,
+    left: 10,
+    opacity: 0.5,
+    transition: "opacity 500ms",
+    "&:hover": {
+      opacity: 1,
+    },
+  },
+});
 
 type Props = {
   regions: Array<Region>;
@@ -64,8 +87,12 @@ type Props = {
   pointDistancePrecision?: number;
   regionClsList?: Array<string> | Array<{ id: string; label: string }>;
   regionTagList?: Array<string>;
+  regionTagSingleSelection?: boolean;
   allowedArea?: { x: number; y: number; w: number; h: number };
-  RegionEditLabel?: ComponentType<any> | FunctionComponent<any> | null;
+  RegionEditLabel?:
+    | ComponentType<RegionLabelProps>
+    | FunctionComponent<RegionLabelProps>
+    | null;
   videoPlaying?: boolean;
   zoomOnAllowedArea?: boolean;
   fullImageSegmentationMode?: boolean;
@@ -135,6 +162,7 @@ export const ImageCanvas = ({
   pointDistancePrecision = 0,
   regionClsList,
   regionTagList,
+  regionTagSingleSelection,
   showCrosshairs,
   showHighlightBox = true,
   showPointDistances,
@@ -163,7 +191,7 @@ export const ImageCanvas = ({
   keypointDefinitions,
   allowComments,
 }: Props) => {
-  const classes = useStyles();
+  const { classes } = useStyles();
   const canvasEl = useRef<HTMLCanvasElement | null>(null);
   const layoutParams = useRef<CanvasLayoutParams | null>(null);
   const [dragging, changeDragging] = useRafState(false);
@@ -424,6 +452,7 @@ export const ImageCanvas = ({
               mouseEvents={mouseEvents}
               regionClsList={regionClsList}
               regionTagList={regionTagList}
+              regionTagSingleSelection={regionTagSingleSelection}
               onBeginRegionEdit={onBeginRegionEdit}
               onChangeRegion={onChangeRegion}
               onCloseRegionEdit={onCloseRegionEdit}

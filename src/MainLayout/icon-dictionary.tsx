@@ -3,24 +3,28 @@
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import {
   faChartLine,
+  faCompress,
   faCrosshairs,
   faDrawPolygon,
   faEdit,
   faExpand,
   faGripLines,
   faHandPaper,
-  faHandPointer,
   faMask,
   faMousePointer,
   faSearch,
   faTag,
   faVectorSquare,
 } from "@fortawesome/free-solid-svg-icons";
-import { ReactElement } from "react";
+import { OverridableComponent } from "@mui/material/OverridableComponent";
+import { SvgIconTypeMap } from "@mui/material";
 
 const faStyle = { marginTop: 4, width: 16, height: 16, marginBottom: 4 };
 
-export const iconDictionary: Record<string, () => ReactElement> = {
+export const iconDictionary: Record<
+  string,
+  OverridableComponent<SvgIconTypeMap>
+> = {
   select: () => (
     <FontAwesomeIcon
       style={faStyle}
@@ -72,13 +76,11 @@ export const iconDictionary: Record<string, () => ReactElement> = {
   "create-keypoints": () => (
     <FontAwesomeIcon style={faStyle} size="xs" fixedWidth icon={faExpand} />
   ),
-  "full-screen": () => (
-    <FontAwesomeIcon
-      style={faStyle}
-      size="xs"
-      fixedWidth
-      icon={faHandPointer}
-    />
+  fullscreen: () => (
+    <FontAwesomeIcon style={faStyle} size="xs" fixedWidth icon={faExpand} />
+  ),
+  window: () => (
+    <FontAwesomeIcon style={faStyle} size="xs" fixedWidth icon={faCompress} />
   ),
 };
 

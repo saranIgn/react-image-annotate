@@ -1,10 +1,16 @@
 // @flow
 
-import type { Action, Image, MainLayoutState } from "../MainLayout/types";
+import {
+  Action,
+  AnnotatorToolEnum,
+  Image,
+  MainLayoutState,
+  RegionAllowedActions,
+} from "../MainLayout/types";
 import { ComponentType, FunctionComponent, useEffect, useReducer } from "react";
 import Immutable, { ImmutableObject } from "seamless-immutable";
 
-import type { KeypointsDefinition } from "../ImageCanvas/region-tools";
+import type { KeypointsDefinition } from "../types/region-tools.ts";
 import MainLayout from "../MainLayout";
 import SettingsProvider from "../SettingsProvider";
 import combineReducers from "./reducers/combine-reducers";
@@ -20,10 +26,12 @@ export type AnnotatorProps = {
   taskDescription?: string;
   allowedArea?: { x: number; y: number; w: number; h: number };
   regionTagList?: Array<string>;
+  regionTagSingleSelection?: boolean;
+  regionAllowedActions?: Partial<RegionAllowedActions>;
   regionClsList?: Array<string | { id: string; label: string }>;
   imageTagList?: Array<string>;
   imageClsList?: Array<string>;
-  enabledTools?: Array<string>;
+  enabledTools?: Array<AnnotatorToolEnum>;
   selectedTool?: String;
   showTags?: boolean;
   selectedImage?: string | number;
@@ -69,8 +77,14 @@ export const Annotator = ({
     "show-mask",
   ],
   selectedTool = "select",
+  regionTagSingleSelection = false,
   regionTagList = [],
   regionClsList = [],
+  regionAllowedActions = {
+    remove: true,
+    lock: true,
+    visibility: true,
+  },
   imageTagList = [],
   imageClsList = [],
   keyframes = {},
@@ -126,6 +140,7 @@ export const Annotator = ({
     labelImages: imageClsList.length > 0 || imageTagList.length > 0,
     regionClsList,
     regionTagList,
+    regionTagSingleSelection,
     imageClsList,
     imageTagList,
     currentVideoTime: videoTime,
@@ -134,6 +149,11 @@ export const Annotator = ({
     videoName,
     keypointDefinitions,
     allowComments,
+    regionAllowedActions: {
+      remove: regionAllowedActions?.remove ?? true,
+      lock: regionAllowedActions?.lock ?? true,
+      visibility: regionAllowedActions?.visibility ?? true,
+    },
     ...(annotationType === "image"
       ? {
           selectedImage,
@@ -191,7 +211,7 @@ export const Annotator = ({
   }, [selectedImage, state.annotationType, state.images]);
 
   if (!images && !videoSrc)
-    return 'Missing required prop "images" or "videoSrc"';
+    return <div>Missing required prop "images" or "videoSrc"</div>;
 
   return (
     <SettingsProvider>
