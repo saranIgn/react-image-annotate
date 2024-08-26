@@ -31,7 +31,9 @@ import ReactImageAnnotate from "@arifzeeshan-ign/react-image-annotate";
 
 const App = () => (
   <ReactImageAnnotate
-    labelImages
+    onExit={() => {
+            console.log("exit");
+          }}
     regionClsList={["Alpha", "Beta", "Charlie", "Delta"]}
     regionTagList={["tag1", "tag2", "tag3"]}
     images={[
