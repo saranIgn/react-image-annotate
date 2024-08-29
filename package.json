@@ -20,13 +20,13 @@
     "color-alpha": "^2.0.0",
     "lodash": "^4.17.21",
     "moment": "^2.30.0",
-    "monaco-editor": "^0.47.0",
+    "monaco-editor": "^0.50.0",
     "react": "^18.3.1",
     "react-dom": "^18.3.1",
     "react-full-screen": "^1.1.1",
     "react-hotkeys": "^2.0.0",
     "react-markdown": "^9.0.0",
-    "react-monaco-editor": "^0.55.0",
+    "react-monaco-editor": "^0.56.1",
     "react-remove-scroll": "^2.0.4",
     "react-select": "^5.8.0",
     "react-syntax-highlighter": "^15.5.0",
@@ -53,6 +53,7 @@
     "gh-pages": "^2.0.1",
     "prettier": "^2.5.1",
     "react-github-btn": "^1.1.1",
+    "rollup": "^4.21.1",
     "rollup-plugin-peer-deps-external": "^2.2.4",
     "typescript": "^5.2.2",
     "vite": "^5.2.7",
@@ -82,5 +83,16 @@
   ],
   "prettier": {
     "semi": true
-  }
+  },
+  "description": "An Image Annotate Library for React",
+  "author": "Arif Zeeshan",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/arifzeeshan-ign/react-image-annotate/issues"
+  },
+  "homepage": "https://github.com/arifzeeshan-ign/react-image-annotate#readme",
+  "keywords": [
+    "Image",
+    "Annotate"
+  ]
 }
