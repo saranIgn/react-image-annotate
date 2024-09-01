@@ -1,7 +1,7 @@
 // @flow
 import { Action, Image, MainLayoutState } from "../../MainLayout/types";
 import { ExpandingLine, moveRegion, Region } from "../../types/region-tools.ts";
-import Immutable, { ImmutableObject } from "seamless-immutable";
+import Immutable, { ImmutableArray, ImmutableObject } from "seamless-immutable";
 import isEqual from "lodash/isEqual";
 import getActiveImage from "./get-active-image";
 import { saveToHistory } from "./history-handler";
@@ -39,6 +39,18 @@ export default <T extends ImmutableObject<MainLayoutState>>(
       ...state,
       regionClsList: ((oldRegionClsList || []) as string[]).concat(action.cls),
     };
+  }
+
+  if (action.type === "ON_TAG_ADDED" && action.tag) {
+    return Immutable(state).update(
+      "regionTagList",
+      (regionTagList: ImmutableArray<string> = Immutable([])) => {
+        if (!regionTagList.includes(action.tag)) {
+          return regionTagList.concat(action.tag);
+        }
+        return regionTagList;
+      }
+    ) as T;
   }
 
   // Throttle certain actions

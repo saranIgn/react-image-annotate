@@ -121,6 +121,7 @@ type Props = {
   onChangeVideoTime: (time: number) => void;
   onRegionClassAdded: (cls: string) => void;
   onChangeVideoPlaying?: (playing: boolean) => void;
+  onRegionTagAdded: (tag: string) => void;
 };
 
 export type CanvasLayoutParams = {
@@ -190,6 +191,7 @@ export const ImageCanvas = ({
   modifyingAllowedArea = false,
   keypointDefinitions,
   allowComments,
+  onRegionTagAdded,
 }: Props) => {
   const { classes } = useStyles();
   const canvasEl = useRef<HTMLCanvasElement | null>(null);
@@ -460,6 +462,7 @@ export const ImageCanvas = ({
               RegionEditLabel={RegionEditLabel}
               onRegionClassAdded={onRegionClassAdded}
               allowComments={allowComments}
+              onRegionTagAdded={onRegionTagAdded}
             />
           </PreventScrollToParents>
         )}
@@ -473,6 +476,7 @@ export const ImageCanvas = ({
               editing
               region={highlightedRegion}
               allowComments={allowComments}
+              onRegionTagAdded={onRegionTagAdded}
             />
           </div>
         )}

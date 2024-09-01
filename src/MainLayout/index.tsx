@@ -96,6 +96,7 @@ type Props = {
   hideSettings?: boolean;
   hideFullScreen?: boolean;
   hideSave?: boolean;
+  onRegionTagAdded: (tag: string) => void;
 };
 
 export const MainLayout = ({
@@ -111,6 +112,7 @@ export const MainLayout = ({
   hideSettings = false,
   hideFullScreen = false,
   hideSave = false,
+  onRegionTagAdded,
 }: Props) => {
   const { classes } = useStyles();
   const settings = useSettings();
@@ -241,6 +243,7 @@ export const MainLayout = ({
       onImageOrVideoLoaded={action("IMAGE_OR_VIDEO_LOADED", "metadata")}
       onChangeVideoTime={action("CHANGE_VIDEO_TIME", "newTime")}
       onChangeVideoPlaying={action("CHANGE_VIDEO_PLAYING", "isPlaying")}
+      onRegionTagAdded={onRegionTagAdded}
       onRegionClassAdded={onRegionClassAdded}
       allowComments={state.allowComments}
     />

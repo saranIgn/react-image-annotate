@@ -80,6 +80,7 @@ export type RegionLabelProps = {
   onOpen?: (r: Region) => void;
   onRegionClassAdded?: (v: string) => void;
   allowComments?: boolean;
+  onRegionTagAdded: (tag: string) => void;
 };
 
 export const RegionLabel = ({
@@ -87,13 +88,14 @@ export const RegionLabel = ({
   editing,
   allowedClasses,
   allowedTags,
-  tagSingleSelection,
+
   onDelete,
   onChange,
   onClose,
   onOpen,
   onRegionClassAdded,
   allowComments,
+  onRegionTagAdded,
 }: RegionLabelProps) => {
   const { classes } = useStyles();
   const commentInputRef = useRef<HTMLDivElement | null>(null);
@@ -230,31 +232,29 @@ export const RegionLabel = ({
             )}
             {(allowedTags || []).length > 0 && (
               <div style={{ marginTop: 4 }}>
-                <Select
+                <CreatableSelect
+                  isMulti
+                  placeholder="Tags"
                   onChange={(newTags) => {
                     if (Array.isArray(newTags)) {
                       onChange({
                         ...region,
                         tags: newTags.map((t) => t.value),
                       });
-                      return;
-                    }
-                    if (newTags && "value" in newTags) {
-                      onChange({
-                        ...region,
-                        tags: [newTags.value],
-                      });
                     }
                   }}
-                  placeholder="Tags"
+                  onCreateOption={(inputValue) => {
+                    onRegionTagAdded(inputValue);
+                    onChange({
+                      ...region,
+                      tags: [...(region.tags || []), inputValue],
+                    });
+                  }}
                   value={(region.tags || []).map((c) => ({
                     label: c,
                     value: c,
                   }))}
-                  isMulti={!tagSingleSelection}
-                  options={asMutable(
-                    allowedTags?.map((c) => ({ value: c, label: c }))
-                  )}
+                  options={allowedTags?.map((c) => ({ value: c, label: c }))}
                 />
               </div>
             )}

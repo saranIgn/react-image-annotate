@@ -115,6 +115,14 @@ export const Annotator = ({
     );
     if (selectedImage === -1) selectedImage = undefined;
   }
+
+  const handleRegionTagAdded = useEventCallback((tag: string) => {
+    dispatchToReducer({
+      type: "ON_TAG_ADDED",
+      tag: tag,
+    });
+  });
+
   const annotationType = images ? "image" : "video";
   const combinedReducers = (
     annotationType === "image"
@@ -216,6 +224,7 @@ export const Annotator = ({
   return (
     <SettingsProvider>
       <MainLayout
+        onRegionTagAdded={handleRegionTagAdded}
         RegionEditLabel={RegionEditLabel}
         alwaysShowNextButton={Boolean(onNextImage)}
         alwaysShowPrevButton={Boolean(onPrevImage)}

@@ -36,6 +36,7 @@ type RegionTagsProps = {
     | null;
   onRegionClassAdded: (cls: string) => void;
   allowComments?: boolean;
+  onRegionTagAdded: (tag: string) => void;
 };
 export const RegionTags = ({
   regions,
@@ -51,6 +52,7 @@ export const RegionTags = ({
   RegionEditLabel,
   onRegionClassAdded,
   allowComments,
+  onRegionTagAdded,
 }: RegionTagsProps) => {
   const RegionLabel =
     RegionEditLabel != null ? RegionEditLabel : DefaultRegionLabel;
@@ -141,6 +143,7 @@ export const RegionTags = ({
               region={region}
               onRegionClassAdded={onRegionClassAdded}
               allowComments={allowComments}
+              onRegionTagAdded={onRegionTagAdded}
             />
           </div>
         </div>
