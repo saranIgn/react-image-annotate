@@ -893,25 +893,13 @@ export default <T extends ImmutableObject<MainLayoutState>>(
     case "OPEN_REGION_EDITOR": {
       const regionIndex = getRegionIndex(action.region);
       if (regionIndex === null || !activeImage?.regions) return state;
-      const mapped = activeImage.regions.map((r) => ({
+
+      const newRegions = activeImage.regions.map((r, index) => ({
         ...r,
-        highlighted: false,
-        editingLabels: false,
+        highlighted: index === regionIndex,
+        editingLabels: index === regionIndex,
       }));
-      // @ts-ignore
-      const newRegions = Immutable(mapped).setIn(
-        activeImage.regions.map((r) => ({
-          ...r,
-          highlighted: false,
-          editingLabels: false,
-        })),
-        [regionIndex],
-        {
-          ...(activeImage.regions || [])[regionIndex],
-          highlighted: true,
-          editingLabels: true,
-        }
-      );
+
       return Immutable(state).setIn(
         [...pathToActiveImage, "regions"],
         newRegions

@@ -34,7 +34,7 @@ export interface WorkspaceProps {
   allowFullscreen?: boolean;
   hideHeader?: boolean;
   hideHeaderText?: boolean;
-  headerItems?: Array<{ name: string }>;
+  headerItems?: Array<{ name: string } | false | null | undefined>;
   iconDictionary: Record<string, OverridableComponent<SvgIconTypeMap>>;
   headerLeftSide: Array<ReactElement> | null;
   rightSidebarItems: Array<ReactElement>;
@@ -76,7 +76,13 @@ export default ({
               hideHeaderText={hideHeaderText}
               leftSideContent={headerLeftSide}
               onClickItem={onClickHeaderItem}
-              items={headerItems}
+              items={headerItems.filter(
+                (item): item is { name: string } =>
+                  item !== null &&
+                  item !== undefined &&
+                  typeof item === "object" &&
+                  "name" in item
+              )}
             />
           )}
           <SidebarsAndContent ref={sidebarAndContentRef}>

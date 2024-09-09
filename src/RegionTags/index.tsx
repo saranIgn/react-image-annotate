@@ -110,7 +110,10 @@ export const RegionTags = ({
             zIndex: 10 + (region.editingLabels ? 5 : 0),
             width: 200,
           }}
-          onMouseDown={(e) => e.preventDefault()}
+          onMouseDown={(e) => {
+            e.preventDefault();
+            onBeginRegionEdit(region);
+          }}
           onMouseUp={(e) => e.preventDefault()}
           onMouseEnter={(e) => {
             if (region.editingLabels) {

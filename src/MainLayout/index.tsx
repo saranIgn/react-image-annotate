@@ -259,50 +259,53 @@ export const MainLayout = ({
       fullScreenHandle.enter();
     } else if (btnName === "window") {
       fullScreenHandle.exit();
+    } else if (btnName === "clone") {
+      dispatch({
+        type: "HEADER_BUTTON_CLICKED",
+        buttonName: "Clone",
+      });
+    } else {
+      dispatch({
+        type: "HEADER_BUTTON_CLICKED",
+        buttonName: item.name,
+      });
     }
-    dispatch({
-      type: "HEADER_BUTTON_CLICKED",
-      buttonName: item.name,
-    });
   });
 
   const debugModeOn = Boolean(
     window.localStorage.$ANNOTATE_DEBUG_MODE && state
   );
   const nextImageHasRegions =
-    !nextImage || (nextImage.regions && nextImage.regions.length > 0);
+    nextImage && nextImage.regions && nextImage.regions.length > 0;
 
   const headerItems = useMemo(
-    () =>
-      [
-        !hidePrev && { name: "Prev" },
-        !hideNext && { name: "Next" },
-        state.annotationType !== "video"
-          ? null
-          : !state.videoPlaying
-          ? { name: "Play" }
-          : { name: "Pause" },
-        !hideClone &&
-          !nextImageHasRegions &&
-          activeImage?.regions && { name: "Clone" },
-        !hideSettings && { name: "Settings" },
-        !hideFullScreen &&
-          (state.fullScreen ? { name: "Window" } : { name: "Fullscreen" }),
-        !hideSave && { name: "Save" },
-      ].reduce((acc: { name: string }[], curr) => {
-        if (curr) {
-          acc.push(curr);
-        }
-        return acc;
-      }, []),
+    () => [
+      !hidePrev && { name: "Prev" },
+      !hideNext && { name: "Next" },
+      state.annotationType !== "video"
+        ? null
+        : !state.videoPlaying
+        ? { name: "Play" }
+        : { name: "Pause" },
+      !hideClone &&
+        !nextImageHasRegions &&
+        activeImage?.regions && { name: "Clone" },
+      !hideSettings && { name: "Settings" },
+      !hideFullScreen &&
+        (state.fullScreen ? { name: "Window" } : { name: "Fullscreen" }),
+      !hideSave && { name: "Save" },
+    ],
     [
-      state.fullScreen,
-      state.annotationType,
       hidePrev,
       hideNext,
+      state.annotationType,
+      state.fullScreen,
       hideClone,
+      nextImageHasRegions,
+      activeImage?.regions,
       hideSettings,
       hideFullScreen,
+      state.fullScreen,
       hideSave,
     ]
   );

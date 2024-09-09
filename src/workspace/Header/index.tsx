@@ -18,7 +18,8 @@ const Container = styled("div")(() => ({
 interface HeaderProps {
   leftSideContent?: ReactNode;
   hideHeaderText?: boolean;
-  items: Array<{ name: string }>;
+  items: Array<{ name: string } | false | null | undefined>;
+
   onClickItem: (item: { name: string }) => void;
 }
 
@@ -32,14 +33,16 @@ export const Header = ({
     <ThemeProvider theme={theme}>
       <Container>
         <Box flexGrow={1}>{leftSideContent}</Box>
-        {items.map((item, index) => (
-          <HeaderButton
-            key={`${item.name}-${index}`}
-            hideText={hideHeaderText}
-            onClick={() => onClickItem(item)}
-            {...item}
-          />
-        ))}
+        {items.map((item, index) =>
+          item && typeof item === "object" && "name" in item ? (
+            <HeaderButton
+              key={`${item.name}-${index}`}
+              hideText={hideHeaderText}
+              onClick={() => onClickItem(item)}
+              name={item.name}
+            />
+          ) : null
+        )}
       </Container>
     </ThemeProvider>
   );
