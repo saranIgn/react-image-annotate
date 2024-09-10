@@ -10,6 +10,10 @@ export type {
   MainLayoutVideoAnnotationState,
   MainLayoutStateBase,
   AnnotatorToolEnum,
+  Image,
+  VideoImage,
+  RegionAllowedActions,
+  Mode,
 } from "./MainLayout/types";
 
 export type {
