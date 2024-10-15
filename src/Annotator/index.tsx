@@ -31,6 +31,7 @@ export type AnnotatorProps = {
   regionClsList?: Array<string | { id: string; label: string }>;
   imageTagList?: Array<string>;
   imageClsList?: Array<string>;
+  selectedCls?: String;
   enabledTools?: Array<AnnotatorToolEnum>;
   selectedTool?: String;
   showTags?: boolean;
@@ -97,6 +98,7 @@ export const Annotator = ({
   onExit,
   onNextImage,
   onPrevImage,
+  selectedCls,
   keypointDefinitions,
   autoSegmentationOptions = { type: "autoseg" },
   hideHeader,
@@ -154,6 +156,7 @@ export const Annotator = ({
     currentVideoTime: videoTime,
     enabledTools,
     history: [],
+    selectedCls: "Classification",
     videoName,
     keypointDefinitions,
     allowComments,

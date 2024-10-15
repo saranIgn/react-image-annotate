@@ -1,6 +1,6 @@
 {
-  "name": "@arifzeeshan-ign/react-image-annotate",
-  "version": "2.2.2",
+  "name": "@saran-ign/react-image-annotate",
+  "version": "2.2.1",
   "type": "module",
   "main": "dist/react-image-annotate.js",
   "types": "dist/lib.d.ts",
@@ -67,7 +67,7 @@
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/arifzeeshan-ign/react-image-annotate.git"
+    "url": "git+https://github.com/saranIgn/react-image-annotate.git"
   },
   "scripts": {
     "start": "vite --force",
@@ -87,13 +87,16 @@
   "prettier": {
     "semi": true
   },
+  "publishConfig": {
+  "registry": "https://registry.npmjs.org/"
+},
   "description": "An Image Annotate Library for React",
-  "author": "Arif Zeeshan",
+  "author": "Saran",
   "license": "ISC",
   "bugs": {
-    "url": "https://github.com/arifzeeshan-ign/react-image-annotate/issues"
+    "url": "https://github.com/saranIgn/react-image-annotate/issues"
   },
-  "homepage": "https://github.com/arifzeeshan-ign/react-image-annotate#readme",
+  "homepage": "https://github.com/saranIgn/react-image-annotate#readme",
   "keywords": [
     "Image",
     "Annotate"

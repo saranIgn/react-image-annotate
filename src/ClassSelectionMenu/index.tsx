@@ -92,7 +92,7 @@ export const ClassSelectionMenu = ({
   return (
     <ThemeProvider theme={theme}>
       <SidebarBoxContainer
-        title="Classifications"
+        title={selectedCls?selectedCls:"Classification"}
         icon={<BallotIcon style={{ color: muiColors.grey[700] }} />}
         expandedByDefault
       >
