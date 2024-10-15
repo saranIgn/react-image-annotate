@@ -1,6 +1,6 @@
 {
   "name": "@saran-ign/react-image-annotate",
-  "version": "2.2.1",
+  "version": "2.2.2",
   "type": "module",
   "main": "dist/react-image-annotate.js",
   "types": "dist/lib.d.ts",
@@ -88,8 +88,8 @@
     "semi": true
   },
   "publishConfig": {
-  "registry": "https://registry.npmjs.org/"
-},
+    "registry": "https://registry.npmjs.org/"
+  },
   "description": "An Image Annotate Library for React",
   "author": "Saran",
   "license": "ISC",
