@@ -142,7 +142,7 @@ export const SidebarBox = ({
           ) : null
         ) : (
           <Collapse in={expanded}>
-            <div className="panel" style={{ display: "block", height: 200 }}>
+            <div className="panel" style={{ display: "block", height: 200 ,overflowY:"scroll"}}>
               {content}
             </div>
           </Collapse>
