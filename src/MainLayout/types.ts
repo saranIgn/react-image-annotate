@@ -119,6 +119,7 @@ export type MainLayoutStateBase = {
   fullImageSegmentationMode?: boolean;
   autoSegmentationOptions?: AutosegOptions;
   lastMouseMoveCall?: number;
+  classificationTitle?:string;
 };
 
 export interface MainLayoutImageAnnotationState extends MainLayoutStateBase {

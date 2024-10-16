@@ -31,7 +31,7 @@ export type AnnotatorProps = {
   regionClsList?: Array<string | { id: string; label: string }>;
   imageTagList?: Array<string>;
   imageClsList?: Array<string>;
-  selectedCls?: String;
+  classificationTitle?: String;
   enabledTools?: Array<AnnotatorToolEnum>;
   selectedTool?: String;
   showTags?: boolean;
@@ -98,7 +98,6 @@ export const Annotator = ({
   onExit,
   onNextImage,
   onPrevImage,
-  selectedCls,
   keypointDefinitions,
   autoSegmentationOptions = { type: "autoseg" },
   hideHeader,
@@ -110,6 +109,7 @@ export const Annotator = ({
   hideFullScreen,
   hideSave,
   allowComments,
+  classificationTitle="Classifications"
 }: AnnotatorProps) => {
   if (typeof selectedImage === "string") {
     selectedImage = (images || []).findIndex(
@@ -117,6 +117,8 @@ export const Annotator = ({
     );
     if (selectedImage === -1) selectedImage = undefined;
   }
+
+
 
   const handleRegionTagAdded = useEventCallback((tag: string) => {
     dispatchToReducer({
@@ -156,7 +158,7 @@ export const Annotator = ({
     currentVideoTime: videoTime,
     enabledTools,
     history: [],
-    selectedCls: "Classification",
+    classificationTitle,
     videoName,
     keypointDefinitions,
     allowComments,
@@ -223,10 +225,10 @@ export const Annotator = ({
 
   if (!images && !videoSrc)
     return <div>Missing required prop "images" or "videoSrc"</div>;
-
   return (
     <SettingsProvider>
       <MainLayout
+        classTitle={state.classificationTitle}
         onRegionTagAdded={handleRegionTagAdded}
         RegionEditLabel={RegionEditLabel}
         alwaysShowNextButton={Boolean(onNextImage)}

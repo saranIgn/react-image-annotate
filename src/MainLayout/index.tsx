@@ -87,6 +87,7 @@ type Props = {
   dispatch: (action: Action) => void;
   alwaysShowNextButton?: boolean;
   alwaysShowPrevButton?: boolean;
+  classTitle?: string;
   onRegionClassAdded: (cls: string) => void;
   hideHeader?: boolean;
   hideHeaderText?: boolean;
@@ -103,6 +104,7 @@ export const MainLayout = ({
   state,
   dispatch,
   RegionEditLabel,
+  classTitle,
   onRegionClassAdded,
   hideHeader,
   hideHeaderText,
@@ -113,6 +115,7 @@ export const MainLayout = ({
   hideFullScreen = false,
   hideSave = false,
   onRegionTagAdded,
+  
 }: Props) => {
   const { classes } = useStyles();
   const settings = useSettings();
@@ -352,6 +355,7 @@ export const MainLayout = ({
         selectedCls={state.selectedCls}
         regionClsList={state.regionClsList}
         onSelectCls={action("SELECT_CLASSIFICATION", "cls")}
+        classTitle={classTitle}
       />
     ),
     state.annotationType === "image" && state.labelImages && (

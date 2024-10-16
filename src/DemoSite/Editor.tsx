@@ -95,6 +95,7 @@ export const examples: Record<string, () => Omit<AnnotatorProps, "onExit">> = {
     allowComments: true,
     fullImageSegmentationMode: true,
     autoSegmentationOptions: { type: "autoseg" },
+    classificationTitle:"object"
   }),
   "Simple Bounding Box": () => ({
     taskDescription:

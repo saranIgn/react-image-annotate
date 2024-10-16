@@ -60,12 +60,14 @@ interface ClassSelectionMenuProps {
   selectedCls?: string;
   regionClsList: (string | { id: string; label: string })[];
   onSelectCls: (value: string) => void;
+  classTitle?: string;
 }
 
 export const ClassSelectionMenu = ({
   selectedCls,
   regionClsList,
   onSelectCls,
+  classTitle
 }: ClassSelectionMenuProps) => {
   useEffect(() => {
     const keyMapping: Record<
@@ -92,7 +94,7 @@ export const ClassSelectionMenu = ({
   return (
     <ThemeProvider theme={theme}>
       <SidebarBoxContainer
-        title={selectedCls?selectedCls:"Classification"}
+        title={classTitle?classTitle :""}
         icon={<BallotIcon style={{ color: muiColors.grey[700] }} />}
         expandedByDefault
       >
