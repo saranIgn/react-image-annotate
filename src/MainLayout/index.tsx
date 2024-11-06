@@ -368,6 +368,7 @@ export const MainLayout = ({
         expandedByDefault
       />
     ),
+    classTitle !== "Image Classification" &&(
     <RegionSelector
       key="regionSelector"
       regionClsList={state.regionClsList}
@@ -376,7 +377,7 @@ export const MainLayout = ({
       onSelectRegion={action("SELECT_REGION", "region")}
       onDeleteRegion={action("DELETE_REGION", "region")}
       onChangeRegion={action("CHANGE_REGION", "region")}
-    />,
+    />),
     state.annotationType === "video" && state.keyframes && (
       <KeyframesSelector
         key="keyframesSelector"
@@ -386,11 +387,12 @@ export const MainLayout = ({
         keyframes={state.keyframes}
       />
     ),
+    classTitle !== "Image Classification" &&(
     <HistorySidebarBox
       key="historySidebarBox"
       history={state.history}
       onRestoreHistory={action("RESTORE_HISTORY")}
-    />,
+    />),
   ].reduce((acc: ReactElement[], curr) => {
     if (curr) {
       acc.push(curr);

@@ -90,12 +90,12 @@ export const examples: Record<string, () => Omit<AnnotatorProps, "onExit">> = {
         name: "bianchi-oltre-xr4",
       },
     ],
-    imageClsList: ["test", "test2"],
+    imageClsList: Array.from({ length: 20 }, (_, index) => `Label ${index + 1}`),
     showPointDistances: true,
     allowComments: true,
     fullImageSegmentationMode: true,
     autoSegmentationOptions: { type: "autoseg" },
-    classificationTitle:"object"
+    classificationTitle:"Image Classification"
   }),
   "Simple Bounding Box": () => ({
     taskDescription:

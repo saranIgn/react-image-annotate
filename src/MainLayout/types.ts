@@ -115,7 +115,7 @@ export type MainLayoutStateBase = {
   history: Array<{ time: Date; state: MainLayoutState; name: string }>;
   keypointDefinitions: KeypointsDefinition;
   allowComments?: boolean;
-  lastAction?: Action;
+  lastAction?:Action;
   fullImageSegmentationMode?: boolean;
   autoSegmentationOptions?: AutosegOptions;
   lastMouseMoveCall?: number;

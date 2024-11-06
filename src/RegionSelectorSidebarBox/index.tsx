@@ -287,7 +287,7 @@ export const RegionSelectorSidebarBox = ({
         expandedByDefault
       >
         <div className={classes.container}>
-          <MemoRowHeader regionAllowedActions={regionAllowedActions} />
+          <MemoRowHeader regionAllowedActions={regionAllowedActions}  />
           <HeaderSep />
           {regions.map((r, i) => (
             <MemoRow

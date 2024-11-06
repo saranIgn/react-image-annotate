@@ -5,6 +5,7 @@ import {
   AnnotatorToolEnum,
   Image,
   MainLayoutState,
+  MainLayoutStateBase,
   RegionAllowedActions,
 } from "../MainLayout/types";
 import { ComponentType, FunctionComponent, useEffect, useReducer } from "react";
@@ -33,6 +34,7 @@ export type AnnotatorProps = {
   imageClsList?: Array<string>;
   classificationTitle?: String;
   enabledTools?: Array<AnnotatorToolEnum>;
+  onRegionClassAdded?:(state: MainLayoutState) => void;
   selectedTool?: String;
   showTags?: boolean;
   selectedImage?: string | number;
@@ -41,6 +43,7 @@ export type AnnotatorProps = {
   pointDistancePrecision?: number;
   RegionEditLabel?: ComponentType<any> | FunctionComponent<any> | null;
   onExit: (state: MainLayoutState) => void;
+
   videoTime?: number;
   videoSrc?: string;
   keyframes?: Object;
@@ -59,6 +62,7 @@ export type AnnotatorProps = {
   allowComments?: boolean;
   onNextImage?: (state: MainLayoutState) => void;
   onPrevImage?: (state: MainLayoutState) => void;
+  onDeleteRegion?: (state: MainLayoutStateBase) =>void;
 };
 
 export const Annotator = ({

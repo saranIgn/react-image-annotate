@@ -122,7 +122,7 @@ export const ClassSelectionMenu = ({
                 selected: getRegionValue(item) === selectedCls,
               })}
             >
-              {index < 9 ? `Key [${index + 1}]` : ""}
+              {`Key [${index + 1}]`}
             </Number>
           </LabelContainer>
         ))}

@@ -77,6 +77,7 @@ interface SidebarBoxProps {
   expandedByDefault?: boolean;
 }
 
+
 export const SidebarBox = ({
   icon,
   title,
@@ -103,7 +104,6 @@ export const SidebarBox = ({
     },
     [changeExpandedState, title]
   );
-
   const toggleExpanded = useEventCallback(() => changeExpanded(!expanded));
   const customIconMapping = useIconDictionary();
   const TitleIcon = customIconMapping[title.toLowerCase()];
@@ -142,7 +142,7 @@ export const SidebarBox = ({
           ) : null
         ) : (
           <Collapse in={expanded}>
-            <div className="panel" style={{ display: "block", height: 200 ,overflowY:"scroll"}}>
+            <div className="panel" style={title==="Image Tags"?{display: "block", height: 200 }:{display: "block", height: 200,overflowY:"scroll"}}>
               {content}
             </div>
           </Collapse>
