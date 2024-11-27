@@ -80,15 +80,15 @@ export const ClassSelectionMenu = ({
         onSelectCls(getRegionValue(item));
       };
     }
-    const onKeyDown = (e: KeyboardEvent) => {
-      if (keyMapping[e.key]) {
-        keyMapping[e.key]();
-        e.preventDefault();
-        e.stopPropagation();
-      }
-    };
-    window.addEventListener("keydown", onKeyDown);
-    return () => window.removeEventListener("keydown", onKeyDown);
+    // const onKeyDown = (e: KeyboardEvent) => {
+    //   if (keyMapping[e.key]) {
+    //     keyMapping[e.key]();
+    //     e.preventDefault();
+    //     e.stopPropagation();
+    //   }
+    // };
+    // window.addEventListener("keydown", onKeyDown);
+    // return () => window.removeEventListener("keydown", onKeyDown);
   }, [regionClsList, selectedCls]);
 
   return (

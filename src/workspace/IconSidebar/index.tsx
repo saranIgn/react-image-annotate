@@ -32,6 +32,7 @@ export const IconSidebar = ({
     <ThemeProvider theme={theme}>
       <Container>
         {items.map((item) => {
+          if(item.name.toLowerCase() !== "select"){
           let NameIcon =
             customIconMapping[item.name.toLowerCase()] ||
             iconMapping[item.name.toLowerCase()] ||
@@ -64,7 +65,7 @@ export const IconSidebar = ({
               {buttonPart}
             </Tooltip>
           );
-        })}
+}})}
       </Container>
     </ThemeProvider>
   );

@@ -183,7 +183,7 @@ export const RegionLabel = ({
               <div style={{ marginTop: 6 }}>
                 {isCreatableAllowedClasses ? (
                   <CreatableSelect
-                    placeholder="Classification"
+                    placeholder="Select Label"
                     onChange={(o, actionMeta) => {
                       if (!o) return;
                       if (
@@ -209,7 +209,7 @@ export const RegionLabel = ({
                   />
                 ) : (
                   <Select
-                    placeholder="Classification"
+                    placeholder="Select Label"
                     onChange={(o) => {
                       if (!o) return;
                       onChange({

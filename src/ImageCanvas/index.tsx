@@ -39,7 +39,26 @@ import { ImagePosition } from "../types/common.ts";
 import { AutosegOptions } from "autoseg/webworker";
 import { tss } from "tss-react/mui";
 
-const theme = createTheme();
+const theme = createTheme(
+  {
+    palette: {
+      mode: 'dark',
+      primary: {
+        main: '#90caf9',
+      },
+      secondary: {
+        main: '#f48fb1',
+      },
+      background: {
+        default: '#121212',
+        paper: '#1d1d1d',
+      },
+    },
+    typography: {
+      fontFamily: 'Roboto, Arial, sans-serif',
+    },
+ 
+});
 const useStyles = tss.create({
   canvas: { width: "100%", height: "100%", position: "relative", zIndex: 1 },
   zoomIndicator: {
