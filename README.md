@@ -88,7 +88,7 @@ All of the following properties can be defined on the Annotator...
 | `hideSave`                 | `boolean`                                               | Hide `Save` button from the header bar.                                                                                                                       | `false`       |
 
 ## Developers
-
+Change theme :  localStorage.setItem("_annotate_bgColor", "black")
 ### Development
 
 This project uses [react-storybook](https://storybook.js.org/). To begin developing run the following commands in the
