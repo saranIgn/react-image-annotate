@@ -10,6 +10,7 @@ import { createTheme, ThemeProvider } from "@mui/material/styles";
 import { MainLayoutVideoAnnotationState } from "../MainLayout/types.ts";
 
 const theme = createTheme();
+
 const KeyframeRow = styled("div")(() => ({
   cursor: "pointer",
   display: "flex",
@@ -44,6 +45,7 @@ const KeyframeRow = styled("div")(() => ({
       },
     },
   },
+  
 }));
 
 interface KeyframesSelectorSidebarBoxProps {

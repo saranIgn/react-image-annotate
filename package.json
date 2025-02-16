@@ -1,6 +1,6 @@
 {
   "name": "@saran-ign/react-image-annotate",
-  "version": "2.2.10",
+  "version": "2.2.11",
   "type": "module",
   "main": "dist/react-image-annotate.js",
   "types": "dist/lib.d.ts",

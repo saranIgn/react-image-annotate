@@ -11,6 +11,9 @@ import { SvgIconTypeMap } from "@mui/material";
 import { OverridableComponent } from "@mui/material/OverridableComponent";
 
 const theme = createTheme();
+const getStoredColor = () => {
+  return localStorage.getItem("_annotate_bgColor") || "#fff"; // Default to black if not found
+};
 
 const Container = styled("div")(() => ({
   display: "flex",
@@ -19,6 +22,7 @@ const Container = styled("div")(() => ({
   height: "100%",
   overflow: "hidden",
   maxWidth: "100vw",
+  backgroundColor:getStoredColor()
 }));
 const SidebarsAndContent = styled("div")(() => ({
   display: "flex",

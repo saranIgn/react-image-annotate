@@ -1,8 +1,11 @@
 // @flow
 
 import { memo, ReactNode } from "react";
-import { createTheme, ThemeProvider } from "@mui/material/styles";
+import { createTheme, ThemeProvider  } from "@mui/material/styles";
 import { SidebarBox } from "../workspace/SidebarBox";
+import {  CssBaseline } from "@mui/material";
+import colors from '../../dist/colors';
+
 
 const theme = createTheme();
 
@@ -21,6 +24,7 @@ export const SidebarBoxContainer = ({
 }: SidebarBoxContainerProps) => {
   return (
     <ThemeProvider theme={theme}>
+       <CssBaseline />
       <SidebarBox icon={icon} title={title}>
         {children}
       </SidebarBox>

@@ -11,7 +11,12 @@ import { useIconDictionary } from "../icon-dictionary.ts";
 import { grey } from "@mui/material/colors";
 import classnames from "classnames";
 
+
 const theme = createTheme();
+const getStoredColor = () => {
+  return localStorage.getItem("_annotate_bgColor") || "#fff"; // Default to black if not found
+};
+
 const ContainerDiv = styled("div")(() => ({
   borderBottom: `2px solid ${grey[400]}`,
   "&:firstChild": { borderTop: `1px solid ${grey[400]}` },
@@ -23,6 +28,7 @@ const HeaderDiv = styled("div")(() => ({
   padding: 4,
   paddingLeft: 16,
   paddingRight: 12,
+  background:getStoredColor(),
   "& .iconContainer": {
     color: grey[600],
     display: "flex",
@@ -131,7 +137,7 @@ export const SidebarBox = ({
               },
             }}
           >
-            <ExpandIcon
+            <ExpandIcon  style={{color:"grey"}}
               className={classnames("icon", expanded && "expanded")}
             />
           </IconButton>
@@ -142,7 +148,7 @@ export const SidebarBox = ({
           ) : null
         ) : (
           <Collapse in={expanded}>
-            <div className="panel" style={title==="Image Tags"?{display: "block", height: 200 }:{display: "block", height: 200,overflowY:"scroll"}}>
+            <div className="panel" style={title==="Image Tags"?{display: "block", height: 200,background:getStoredColor()  }:{display: "block", height: 200,overflowY:"scroll",background:getStoredColor()}}>
               {content}
             </div>
           </Collapse>

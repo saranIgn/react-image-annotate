@@ -6,6 +6,10 @@ import ContractIcon from "@mui/icons-material/KeyboardArrowRight";
 import { grey } from "@mui/material/colors";
 
 const theme = createTheme();
+const getStoredColor = () => {
+  return localStorage.getItem("_annotate_bgColor") || "#fff"; // Default to black if not found
+};
+
 const Container = styled("div")(() => ({
   width: 0,
   display: "flex",
@@ -107,7 +111,7 @@ export const RightSidebar = ({
   }, [initiallyExpanded, expanded]);
 
   const containerStyle = useMemo(
-    () => ({ height: height || "100%" }),
+    () => ({ height: height || "100%" ,background:getStoredColor()}),
     [height]
   );
 

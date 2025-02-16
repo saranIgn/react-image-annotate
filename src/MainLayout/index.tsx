@@ -41,9 +41,9 @@ import { tss } from "tss-react/mui";
 import { RegionLabelProps } from "../RegionLabel";
 import SettingsDialog from "../SettingsDialog";
 
-// import Fullscreen from "../Fullscreen"
 
 const theme = createTheme();
+
 const useStyles = tss.create({
   container: {
     display: "flex",

@@ -7,12 +7,25 @@ import { AnnotatorToolEnum } from "../../MainLayout/types.ts";
 import { IconSidebarItem } from "../../types/common.ts";
 
 const theme = createTheme();
+const getStoredColor = () => {
+  return localStorage.getItem("_annotate_bgColor") || "#fff"; // Default to black if not found
+};
+
+const iconColor=() => {
+  if(getStoredColor()=== "#fff"){
+   return {"color":"blue"}
+  }else if(getStoredColor()=== "back"){
+    return {"color":"default"}
+  }else{
+    return {"color":"#fff"}
+  }
+};
 const Container = styled("div")(() => ({
   width: 50,
   height: "100%",
   display: "flex",
   flexDirection: "column",
-  backgroundColor: "#fff",
+  backgroundColor: getStoredColor(),
   flexShrink: 0,
 }));
 
@@ -40,20 +53,24 @@ export const IconSidebar = ({
 
           const buttonPart = (
             <IconButton
-              key={item.name}
-              color={
-                item.selected ||
-                selectedTools.includes(
-                  item.name.toLowerCase() as AnnotatorToolEnum
-                )
-                  ? "primary"
-                  : "default"
-              }
-              disabled={Boolean(item.disabled)}
-              onClick={() =>
-                item.onClick ? item.onClick(item) : onClickItem(item)
-              }
-            >
+            style={item.selected ||
+              selectedTools.includes(
+                item.name.toLowerCase() as AnnotatorToolEnum
+              )? iconColor() : {"color":"grey"}}
+            key={item.name}
+            // color={
+            //   item.selected ||
+            //   selectedTools.includes(
+            //     item.name.toLowerCase() as AnnotatorToolEnum
+            //   )
+            //     ? "primary"
+            //     : "default"
+            // }
+            disabled={Boolean(item.disabled)}
+            onClick={() =>
+              item.onClick ? item.onClick(item) : onClickItem(item)
+            }
+          >
               {<NameIcon />}
             </IconButton>
           );

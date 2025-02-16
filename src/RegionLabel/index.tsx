@@ -18,8 +18,59 @@ import { tss } from "tss-react/mui";
 import { grey } from "@mui/material/colors";
 
 const theme = createTheme();
+const getStoredColor = () => {
+  return localStorage.getItem("_annotate_bgColor") || "#fff"; // Default to white if not found
+};
+const textColor= () =>{
+  if(getStoredColor()==="#fff"){
+    return "#000";
+  }else {
+      return "#fff";
+  }
+}
+const selectStyles = {
+  control: (provided: any, state: any) => ({
+    ...provided,
+    backgroundColor: getStoredColor(), // Dynamic background color
+    borderColor: state.isFocused ? "#007bff" : "#ccc", // Border color
+    boxShadow: "none",
+    color: textColor(), // Default text color
+    "&:hover": {
+      borderColor: "#0056b3",
+    },
+  }),
+  menu: (provided: any) => ({
+    ...provided,
+    backgroundColor: getStoredColor(), // Dropdown background
+    borderRadius: "4px",
+    border: "1px solid #ccc",
+  }),
+  option: (provided: any, { isFocused, isSelected }: any) => ({
+    ...provided,
+    backgroundColor: isSelected
+      ? "#007bff"
+      : isFocused
+      ? "#f0f0f0"
+      : "transparent",
+    color: isSelected ? "#ffffff" : "grey",
+    "&:hover": {
+      backgroundColor: "#ddd",
+    },
+  }),
+  singleValue: (provided: any) => ({
+    ...provided,
+    color: textColor(), // Ensure selected value is visible
+  }),
+  placeholder: (provided: any) => ({
+    ...provided,
+    color: "#777", // Placeholder color
+  }),
+};
+
+
 const useStyles = tss.create({
   regionInfo: {
+    backgroundColor:getStoredColor(),
     fontSize: 12,
     cursor: "default",
     transition: "opacity 200ms",
@@ -129,11 +180,12 @@ export const RegionLabel = ({
         className={classnames(classes.regionInfo, {
           highlighted: region.highlighted,
         })}
+        
       >
         {!editing ? (
           <div>
             {region.cls && (
-              <div className="name">
+              <div className="name" style={{ color: "grey"}}>
                 <div
                   className="circle"
                   style={{ backgroundColor: region.color }}
@@ -183,6 +235,7 @@ export const RegionLabel = ({
               <div style={{ marginTop: 6 }}>
                 {isCreatableAllowedClasses ? (
                   <CreatableSelect
+                  styles={selectStyles}
                     placeholder="Select Label"
                     onChange={(o, actionMeta) => {
                       if (!o) return;
@@ -209,6 +262,7 @@ export const RegionLabel = ({
                   />
                 ) : (
                   <Select
+                  styles={selectStyles}
                     placeholder="Select Label"
                     onChange={(o) => {
                       if (!o) return;
@@ -233,6 +287,7 @@ export const RegionLabel = ({
             {(allowedTags || []).length > 0 && (
               <div style={{ marginTop: 4 }}>
                 <CreatableSelect
+                styles={selectStyles}
                   isMulti
                   placeholder="Tags"
                   onChange={(newTags) => {

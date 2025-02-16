@@ -6,8 +6,11 @@ import DescriptionIcon from "@mui/icons-material/Description";
 import { createTheme, styled, ThemeProvider } from "@mui/material/styles";
 import { grey } from "@mui/material/colors";
 import Markdown from "react-markdown";
+import { CssBaseline } from "@mui/material";
+
 
 const theme = createTheme();
+
 const MarkdownContainer = styled("div")(() => ({
   paddingLeft: 16,
   paddingRight: 16,
@@ -30,6 +33,7 @@ export const TaskDescriptionSidebarBox = ({
 }) => {
   return (
     <ThemeProvider theme={theme}>
+      <CssBaseline/>
       <SidebarBoxContainer
         title="Task Description"
         icon={<DescriptionIcon style={{ color: grey[700] }} />}

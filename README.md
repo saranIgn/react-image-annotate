@@ -1,6 +1,6 @@
 # React Image Annotate
 
-[![npm version](https://img.shields.io/npm/v/@arifzeeshan-ign/react-image-annotate.svg)](https://www.npmjs.com/package/@arifzeeshan-ign/react-image-annotate)
+[![npm version](https://img.shields.io/npm/v/@saran-ign/react-image-annotate.svg)](https://www.npmjs.com/package/@saran-ign/react-image-annotate)
 
 Fork of react-image-annotate - The best image/video annotation tool
 ever. [Check out the demo here](https://universaldatatool.github.io/react-image-annotate/). Or
@@ -23,11 +23,11 @@ Implemented features in fork:
 
 ## Usage
 
-`npm i @arifzeeshan-ign/react-image-annotate`
+`npm i @saran-ign/react-image-annotate`
 
 ```javascript
 import React from "react";
-import ReactImageAnnotate from "@arifzeeshan-ign/react-image-annotate";
+import ReactImageAnnotate from "@saran-ign/react-image-annotate";
 
 const App = () => (
   <ReactImageAnnotate

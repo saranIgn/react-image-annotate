@@ -30,6 +30,20 @@ const StyledButton = styled(Button)(() => ({
   marginLeft: 1,
   marginRight: 1,
 }));
+const StyledSaveButton = styled(Button)(() => ({
+  color: "#fff",
+  textTransform: "none",
+  backgroundColor: "#002789",
+  width: 60,
+  paddingTop: 8,
+  paddingBottom: 4,
+  marginLeft: 1,
+  marginRight: 1,
+  "&:hover":{
+    backgroundColor: "#0616ff", 
+  }
+}));
+
 const ButtonInnerContent = styled("div")(() => ({
   display: "flex",
   flexDirection: "column",
@@ -73,6 +87,7 @@ export const HeaderButton = ({
   const customIconMapping = useIconDictionary();
   return (
     <ThemeProvider key={name} theme={theme}>
+      {name === "Save" ? (<StyledSaveButton onClick={onClick} disabled={disabled}>{name} </StyledSaveButton>) : 
       <StyledButton onClick={onClick} disabled={disabled}>
         <ButtonInnerContent>
           <IconContainer textHidden={hideText}>
@@ -84,7 +99,7 @@ export const HeaderButton = ({
             </Text>
           )}
         </ButtonInnerContent>
-      </StyledButton>
+      </StyledButton>}
     </ThemeProvider>
   );
 };

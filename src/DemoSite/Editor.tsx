@@ -13,6 +13,7 @@ import DialogActions from "@mui/material/DialogActions";
 import MonacoEditor from "react-monaco-editor";
 import { AnnotatorProps } from "../Annotator";
 
+
 const theme = createTheme();
 const useStyles = tss.create(() => ({
   editBar: {

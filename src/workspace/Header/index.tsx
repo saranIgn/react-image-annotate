@@ -4,11 +4,13 @@ import { createTheme, styled, ThemeProvider } from "@mui/material/styles";
 import { ReactNode } from "react";
 
 const theme = createTheme();
-
+const getStoredColor = () => {
+  return localStorage.getItem("_annotate_bgColor") || "#fff"; // Default to black if not found
+};
 const Container = styled("div")(() => ({
   width: "100%",
   display: "flex",
-  backgroundColor: "#fff",
+  backgroundColor: getStoredColor(),
   borderBottom: "1px solid #ccc",
   alignItems: "center",
   flexShrink: 1,
