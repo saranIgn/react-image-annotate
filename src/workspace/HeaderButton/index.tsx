@@ -39,6 +39,7 @@ const StyledSaveButton = styled(Button)(() => ({
   paddingBottom: 4,
   marginLeft: 1,
   marginRight: 1,
+  borderColor: "secondary.main",
   "&:hover":{
     backgroundColor: "#0616ff", 
   }

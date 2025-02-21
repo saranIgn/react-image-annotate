@@ -23,11 +23,13 @@ const getStoredColor = () => {
 };
 const textColor= () =>{
   if(getStoredColor()==="#fff"){
-    return "#000";
+    return "#1E1E1E";
   }else {
       return "#fff";
   }
 }
+
+
 const selectStyles = {
   control: (provided: any, state: any) => ({
     ...provided,
@@ -228,7 +230,7 @@ export const RegionLabel = ({
                 style={{ width: 22, height: 22 }}
                 size="small"
               >
-                <TrashIcon style={{ marginTop: -8, width: 16, height: 16 }} />
+                <TrashIcon style={{ marginTop: -8, width: 16, height: 16,color:"#F24F4F" }} />
               </IconButton>
             </div>
             {(allowedClasses || []).length > 0 && (

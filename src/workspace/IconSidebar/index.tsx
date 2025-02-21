@@ -14,8 +14,8 @@ const getStoredColor = () => {
 const iconColor=() => {
   if(getStoredColor()=== "#fff"){
    return {"color":"blue"}
-  }else if(getStoredColor()=== "back"){
-    return {"color":"default"}
+  }else if(getStoredColor()=== "#1E1E1E"){
+    return {"color":"#fff"}
   }else{
     return {"color":"#fff"}
   }

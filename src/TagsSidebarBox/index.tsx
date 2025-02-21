@@ -7,7 +7,7 @@ import { grey } from "@mui/material/colors";
 import useEventCallback from "use-event-callback";
 import Immutable from "seamless-immutable";
 import Select, { MultiValue } from "react-select";
-localStorage.setItem("_annotate_bgColor", "black");
+
 type Props = {
   currentImage: { cls?: string; tags?: Array<string> } | null;
   imageClsList?: Array<string>;
@@ -20,7 +20,7 @@ const getStoredColor = () => {
 };
 const textColor = () => {
   if (getStoredColor() === "#fff") {
-    return "#000";
+    return "#1E1E1E";
   } else {
     return "#fff";
   }
