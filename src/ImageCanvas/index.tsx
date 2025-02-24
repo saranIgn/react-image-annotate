@@ -38,6 +38,7 @@ import useWasdMode from "./use-wasd-mode";
 import { ImagePosition } from "../types/common.ts";
 import { AutosegOptions } from "autoseg/webworker";
 import { tss } from "tss-react/mui";
+import { CircularProgress, Typography, Box as MuiBox } from '@mui/material';
 
 const theme = createTheme();
 
@@ -532,6 +533,12 @@ export const ImageCanvas = ({
             imagePosition={imagePosition}
             regions={regions}
           />
+          {!imageLoaded && <MuiBox position="absolute" top="50%" left="50%" sx={{ transform: 'translate(-50%, -50%)' }} textAlign="center">
+          <CircularProgress />
+          <Typography variant="h6" mt={2}>
+            Loading image, please wait...
+          </Typography>
+        </MuiBox>}
           <VideoOrImageCanvasBackground
             videoPlaying={videoPlaying}
             imagePosition={imagePosition}

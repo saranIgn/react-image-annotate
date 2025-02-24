@@ -9,6 +9,10 @@ import capitalize from "lodash/capitalize";
 import classnames from "classnames";
 
 const theme = createTheme();
+const getStoredColor = () => {
+  return localStorage.getItem("_annotate_bgColor") || "#fff"; // Default to black if not found
+};
+
 const LabelContainer = styled("div")(() => ({
   display: "flex",
   paddingTop: 4,
@@ -18,7 +22,8 @@ const LabelContainer = styled("div")(() => ({
   alignItems: "center",
   cursor: "pointer",
   opacity: 0.7,
-  backgroundColor: "#fff",
+  color:"#616161",
+  backgroundColor: getStoredColor(),
   "&:hover": {
     opacity: 1,
   },
